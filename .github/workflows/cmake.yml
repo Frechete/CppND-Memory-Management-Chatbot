@@ -33,7 +33,6 @@ jobs:
 
     - name: Make
       run: |
-         mkdir build
          cd build
          cmake ..
          make
