@@ -58,7 +58,6 @@ void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens,
         token, tokens.end(),
         [&tokenID](const std::pair<std::string, std::string> &pair) {
           return pair.first == tokenID;
-          ;
         });
     if (token != tokens.end()) {
       element.AddToken(token->second);  // add new keyword to edge
