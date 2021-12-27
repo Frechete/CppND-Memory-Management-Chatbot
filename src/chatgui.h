@@ -29,7 +29,7 @@ public:
     ~ChatBotPanelDialog();
 
     // getter / setter
-   const ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
+   ChatLogic *GetChatLogicHandle() const { return _chatLogic.get(); }
 
     // events
     void paintEvent(wxPaintEvent &evt);
