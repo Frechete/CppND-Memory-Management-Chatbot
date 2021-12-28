@@ -47,7 +47,6 @@ ChatBot::~ChatBot() {
 ////
 
 // Copy constructor
-// Copy constructor
 ChatBot::ChatBot(const ChatBot &other) : _image(other._image)) {
   _chatLogic = other._chatLogic;
   _rootNode = other._rootNode;
@@ -67,6 +66,15 @@ ChatBot(ChatBot &&other) noexcept
   other._chatLogic = nullptr;
   other._rootNode = nullptr;
   other._currentNode = nullptr;
+}
+
+// Copy constructor
+ChatBot& ChatBot::operator=(ChatBot other) noexcept : _image(other._image)) {
+  _chatLogic = other._chatLogic;
+  _rootNode = other._rootNode;
+  _currentNode = other._currentNode;
+  std::cout << this << ": move/copy assignment" << std::endl;
+  return *this;
 }
 ////
 //// EOF STUDENT CODE
