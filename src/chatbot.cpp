@@ -47,10 +47,12 @@ ChatBot::~ChatBot() {
 ////
 
 // Copy constructor
-ChatBot::ChatBot(const ChatBot &other) : _image(std::move(other._image)) {
+// Copy constructor
+ChatBot::ChatBot(const ChatBot &other) : _image(other._image)) {
   _chatLogic = other._chatLogic;
   _rootNode = other._rootNode;
   _currentNode = other._currentNode;
+  std::cout << this << ": copy constructor" << std::endl;
 }
 ////
 //// EOF STUDENT CODE
