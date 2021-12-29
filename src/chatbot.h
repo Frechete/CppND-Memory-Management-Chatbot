@@ -32,9 +32,9 @@ class ChatBot {
 
   //// STUDENT CODE
   ////
-  ChatBot(const ChatBot &other);  // copy constructor
-  ChatBot(ChatBot&& other) noexcept; // move constructor
-  ChatBot& operator=(ChatBot other) noexcept; // move/copy assignment
+  ChatBot(const ChatBot &other) = delete;      // copy constructor
+  ChatBot(ChatBot &&other) noexcept;           // move constructor
+  ChatBot &operator=(ChatBot other) = delete;  // move/copy assignment
 
   ////
   //// EOF STUDENT CODE
