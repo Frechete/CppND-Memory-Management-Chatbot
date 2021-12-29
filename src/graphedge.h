@@ -19,7 +19,7 @@ class GraphEdge {
 
  public:
   // constructor / desctructor
-  GraphEdge(int id);
+  explicit GraphEdge(int id);
 
   // getter / setter
   int GetID() { return _id; }

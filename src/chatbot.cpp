@@ -77,7 +77,7 @@ ChatBot::ChatBot& ChatBot::operator=(ChatBot other) noexcept {
 ////
 //// EOF STUDENT CODE
 
-void ChatBot::ReceiveMessageFromUser(std::string message) {
+void ChatBot::ReceiveMessageFromUser(std::string const message) {
   // loop over all edges and keywords and compute Levenshtein distance to query
   typedef std::pair<GraphEdge *, int> EdgeDist;
   std::vector<EdgeDist> levDists;  // format is <ptr,levDist>
