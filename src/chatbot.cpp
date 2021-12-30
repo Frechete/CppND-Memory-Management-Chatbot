@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <ctime>
-#include <iostream>
 #include <random>
 
 #include "chatlogic.h"
@@ -66,14 +65,17 @@ ChatBot::ChatBot(ChatBot &&other) noexcept : _image(std::move(other._image)) {
 }
 /*
 // Copy constructor
-ChatBot::ChatBot& ChatBot::operator=(ChatBot other) noexcept {
+ChatBot::ChatBot &ChatBot::operator=(ChatBot &&other) :
+_image(std::move(other._image) {
   _chatLogic = other._chatLogic;
   _rootNode = other._rootNode;
   _currentNode = other._currentNode;
-  std::copy(other, this);
-  std::cout << this << ": move/copy assignment" << std::endl;
-  return *this;
-} */
+  std::cout << this << ": move constructor " << std::endl;
+      other._chatLogic = nullptr;
+      other._rootNode =nullptr;
+  other._currentNode = nullptr;
+  std::cout << this << ": move/copy assignment " << std::endl; return *this;
+}*/
 ////
 //// EOF STUDENT CODE
 
