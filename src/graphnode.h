@@ -2,7 +2,6 @@
 #define GRAPHNODE_H_
 
 #include <string>
-#include <utility>
 #include <vector>
 
 #include "chatbot.h"
@@ -20,7 +19,6 @@ class GraphNode {
 
   // data handles (not owned)
   std::vector<GraphEdge *> _parentEdges;  // edges to preceding nodes
-  // std::unique_ptr<ChatBot> _chatBot;
   ChatBot _chatBot;
 
   ////

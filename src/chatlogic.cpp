@@ -220,22 +220,11 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
         std::cout << "ERROR : Multiple root nodes detected" << std::endl;
       }
     }
-  } /*
-   // ChatBot chatBot = ChatBot("../images/chatbot.png");
-   std::unique_ptr<ChatBot> chatBot =
-       std::make_unique<ChatBot>("../images/chatbot.png");
-   _chatBot = chatBot.get();
-   // add chatbot to graph root node
-   _chatBot->SetRootNode(rootNode);
-   rootNode->MoveChatbotHere(std::move(chatBot));*/
-
+  }
   // add chatbot to graph root node
-  // ChatBot chatBot("../images/chatbot.png");
   ChatBot chatBot = ChatBot("../images/chatbot.png");
 
   SetChatbotHandle(&chatBot);  // update _chatBot for chatLogic
-  // add pointer to chatlogic so that chatbot answers can be passed on to the
-  // GUI
   chatBot.SetChatLogicHandle(this);
   chatBot.SetRootNode(rootNode);
   rootNode->MoveChatbotHere(std::move(chatBot));
