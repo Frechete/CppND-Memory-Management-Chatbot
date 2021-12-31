@@ -58,8 +58,9 @@ ChatBot &ChatBot::operator=(const ChatBot &other) {
 }
 
 // move constructor
-ChatBot::ChatBot(ChatBot &&other) noexcept : _image(std::move(other._image)) {
+ChatBot::ChatBot(ChatBot &&other) noexcept {
   std::cout << this << ": ChatBot move constructor" << std::endl;
+  _image.swap(other._image);
   _chatLogic = other._chatLogic;
   _chatLogic->SetChatbotHandle(this);
   _rootNode = other._rootNode;
@@ -72,7 +73,7 @@ ChatBot::ChatBot(ChatBot &&other) noexcept : _image(std::move(other._image)) {
 ChatBot &ChatBot::operator=(ChatBot &&other) {
   std::cout << this << ": ChatBot Move Assignment Operator" << std::endl;
   if (this != &other) {
-    _image = std::move(other._image);
+    _image.swap(other._image);
     _chatLogic = other._chatLogic;
     _chatLogic->SetChatbotHandle(this);
     _rootNode = other._rootNode;
