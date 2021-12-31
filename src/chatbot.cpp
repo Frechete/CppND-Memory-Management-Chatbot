@@ -20,7 +20,7 @@ ChatBot::ChatBot() : _image(nullptr) {
 // constructor WITH memory allocation
 ChatBot::ChatBot(const std::string &filename)
     : _image(std::make_unique<wxBitmap>(filename, wxBITMAP_TYPE_PNG)) {
-  std::cout << "ChatBot Constructor" << std::endl;
+  std::cout << this << ": ChatBot Constructor" << std::endl;
 
   // invalidate data handles
   _chatLogic = nullptr;
@@ -30,22 +30,36 @@ ChatBot::ChatBot(const std::string &filename)
   // load image into heap memory
 }
 
-ChatBot::~ChatBot() { std::cout << "ChatBot Destructor" << std::endl; }
+ChatBot::~ChatBot() {
+  std::cout << this << ": ChatBot Destructor" << std::endl;
+}
 
-//// STUDENT CODE
-
-ChatBot::ChatBot(ChatBot &other) : _image(std::move(other._image)) {
+// Deep Copy
+ChatBot::ChatBot(const ChatBot &other) : _image(std::make_unique<wxBitmap>()) {
   std::cout << this << ": copy constructor" << std::endl;
   _chatLogic = other._chatLogic;
   _chatLogic->SetChatbotHandle(this);
   _rootNode = other._rootNode;
   _currentNode = other._currentNode;
+  *_image = *other._image;
+}
+
+ChatBot &ChatBot::operator=(const ChatBot &other) {
+  std::cout << this << ": ChatBot Copy Assignment" << std::endl;
+  if (this != &other) {
+    _image = std::make_unique<wxBitmap>();
+    *_image = *other._image;
+    _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    _rootNode = other._rootNode;
+    _currentNode = other._currentNode;
+  }
+  return *this;
 }
 
 // move constructor
-// ChatBot::ChatBot(ChatBot &&other) {
 ChatBot::ChatBot(ChatBot &&other) noexcept : _image(std::move(other._image)) {
-  std::cout << this << ": move constructor" << std::endl;
+  std::cout << this << ": ChatBot move constructor" << std::endl;
   _chatLogic = other._chatLogic;
   _chatLogic->SetChatbotHandle(this);
   _rootNode = other._rootNode;
@@ -55,21 +69,8 @@ ChatBot::ChatBot(ChatBot &&other) noexcept : _image(std::move(other._image)) {
   other._currentNode = nullptr;
 }
 
-ChatBot &ChatBot::operator=(ChatBot &other) {
-  std::cout << "ChatBot Copy Assignment" << std::endl;
-  if (this != &other) {
-    _image = std::move(other._image);
-    _chatLogic = other._chatLogic;
-    _chatLogic->SetChatbotHandle(this);
-    _rootNode = other._rootNode;
-    _currentNode = other._currentNode;
-  }
-  return *this;
-}
-
 ChatBot &ChatBot::operator=(ChatBot &&other) {
-  std::cout << "ChatBot Move Assignment Operator" << std::endl;
-
+  std::cout << this << ": ChatBot Move Assignment Operator" << std::endl;
   if (this != &other) {
     _image = std::move(other._image);
     _chatLogic = other._chatLogic;
@@ -77,12 +78,11 @@ ChatBot &ChatBot::operator=(ChatBot &&other) {
     _rootNode = other._rootNode;
     _currentNode = other._currentNode;
     other._chatLogic = nullptr;
+    other._rootNode = nullptr;
+    other._currentNode = nullptr;
   }
   return *this;
 }
-
-////
-//// EOF STUDENT CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string const message) {
   // loop over all edges and keywords and compute Levenshtein distance to query
